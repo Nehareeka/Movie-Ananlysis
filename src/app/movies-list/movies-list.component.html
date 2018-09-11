@@ -1,0 +1,62 @@
+<div class='panel panel-primary'>
+  <div class='panel-heading'>
+    {{pageTitle}}
+  </div>
+  <div class='panel-body'>
+    <div class='table-responsive'>
+      <table class='table'>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Director</th>
+            <th>Actor 1</th>
+            <th>Actor 2</th>
+            <th>Language</th>
+            <th>Country</th>
+            <th>Rating</th>
+            <th>Budget</th>
+            <th>Release Year</th>
+            <th>IMDB Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let movie of pagedItems'>
+            <td>{{ movie?.movie_title }}</td>
+            <td>{{ movie?.director_name }}</td>
+            <td>{{ movie?.actor_1_name }}</td>
+            <td>{{ movie?.actor_2_name }}</td>
+            <td>{{ movie?.language }}</td>
+            <td>{{ movie?.country }}</td>
+            <td>{{ movie?.content_rating }}</td>
+            <td>{{ movie?.budget | currency:'USD': 'symbol' : '1.0' }}</td>
+            <td>{{ movie?.title_year }}</td>
+            <td>
+              <a href='movie?.movie_imdb_link'>Go</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="text-center">
+
+  <!-- pager -->
+  <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+    <li [ngClass]="{disabled:pager.currentPage === 1}">
+      <a (click)="setPage(1)">First</a>
+    </li>
+    <li [ngClass]="{disabled:pager.currentPage === 1}">
+      <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+    </li>
+    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+      <a (click)="setPage(page)">{{page}}</a>
+    </li>
+    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+      <a (click)="setPage(pager.currentPage + 1)">Next</a>
+    </li>
+    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+      <a (click)="setPage(pager.totalPages)">Last</a>
+    </li>
+  </ul>
+</div>
