@@ -6,11 +6,13 @@ import { MoviesListComponent } from './movies-list/movies-list.component';
 import { MoviesService } from 'src/app/services/movies.service';
 import { HttpModule } from '@angular/http';
 import { PagerService } from 'src/app/services/pager.service';
+import { SortDirective } from './shared/sort.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MoviesListComponent
+    MoviesListComponent,
+    SortDirective
   ],
   imports: [
     BrowserModule,
