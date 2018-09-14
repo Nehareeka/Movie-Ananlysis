@@ -7,12 +7,14 @@ import { MoviesService } from 'src/app/services/movies.service';
 import { HttpModule } from '@angular/http';
 import { PagerService } from 'src/app/services/pager.service';
 import { SortDirective } from './shared/sort.directive';
+import { FilterDirective } from './shared/filter.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     MoviesListComponent,
-    SortDirective
+    SortDirective,
+    FilterDirective
   ],
   imports: [
     BrowserModule,

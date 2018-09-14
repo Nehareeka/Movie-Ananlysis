@@ -3,18 +3,35 @@
     {{pageTitle}}
   </div>
   <div class='panel-body'>
+    <div class="row">
+      <div class="col-md-4">
+        <input *ngIf="config?.filtering" placeholder="Filter all columns"
+         [appFilter]="config?.filtering" class="form-control" (tableChanged)="onChangeTable(config)"
+        />
+      </div>
+    </div>
+    <br>
     <div class='table-responsive'>
       <table class='table'>
         <thead>
           <tr>
-              <th *ngFor="let column of columns" [appSort]="config" [column]="column" (sortChanged)="onChangeTable($event)">
-                  {{column.title}}
-                  <i class="pull-right fa"
-                    [ngClass]="{'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}"></i>
-                </th>
+            <th *ngFor="let column of columns" [appSort]="config" [column]="column"
+             (sortChanged)="onChangeTable($event)">
+              {{column.title}}
+              <i class="pull-right fa" [ngClass]="{'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}"></i>
+            </th>
           </tr>
         </thead>
         <tbody>
+          <tr>
+            <td *ngFor="let column of columns">
+            <input *ngIf="column.filtering" placeholder="{{column.filtering.placeholder}}"
+            [appFilter]="column.filtering"
+            class="form-control"
+            style="width: auto;"
+            (tableChanged)="tableChanged(config)"/>
+          </td>
+          </tr>
           <tr *ngFor='let movie of pagedItems'>
             <td>{{ movie?.Title }}</td>
             <td>{{ movie?.Director }}</td>

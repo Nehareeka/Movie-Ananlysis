@@ -50,12 +50,13 @@ export class MoviesListComponent implements OnInit {
       } else {
         this.columns.push({
           title: item, sort: '',
-          filtering: { filterString: '', placeholder: 'Filter by position' }
+          filtering: { filterString: '', placeholder: 'Filter by ' + item }
         });
       }
     });
     this.config = {
-      sorting: { columns: this.columns }
+      sorting: { columns: this.columns },
+      filtering: { filterString: '' }
     };
   }
 
@@ -69,6 +70,42 @@ export class MoviesListComponent implements OnInit {
     });
 
     return { columns: sortColumns };
+  }
+
+  public changeFilter(data: any, config: any): any {
+    let filteredData: Array<any> = data;
+    this.columns.forEach((column: any) => {
+      if (column.filtering) {
+        filteredData = filteredData.filter((item: any) => {
+          return item[column.title].toString().match(column.filtering.filterString);
+        });
+      }
+    });
+
+    if (!config.filtering) {
+      return filteredData;
+    }
+
+    if (config.filtering.columnName) {
+      return filteredData.filter((item: any) =>
+        item[config.filtering.columnName].match(this.config.filtering.filterString));
+    }
+
+    let tempArray: Array<any> = [];
+    filteredData.forEach((item: any) => {
+      let flag = false;
+      this.columns.forEach((column: any) => {
+        if (item[column.title].toString().match(this.config.filtering.filterString)) {
+          flag = true;
+        }
+      });
+      if (flag) {
+        tempArray.push(item);
+      }
+    });
+    filteredData = tempArray;
+
+    return filteredData;
   }
 
   public changeSort(data: any, config: any): any {
@@ -112,11 +149,15 @@ export class MoviesListComponent implements OnInit {
   }
 
   public tableChanged(config: any) {
+    if (config.filtering) {
+      Object.assign(this.config.filtering, config.filtering);
+    }
     if (config.sorting) {
       Object.assign(this.config.sorting, config.sorting);
     }
-    let data = this.moviesInfo.slice(0);
-    let sortedData = this.changeSort(data, this.config);
+    let filteredData = this.changeFilter(this.moviesInfo, this.config);
+    // let data = this.moviesInfo.slice(0);
+    let sortedData = this.changeSort(filteredData, this.config);
     this.setPage(1, sortedData);
   }
 
