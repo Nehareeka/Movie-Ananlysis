@@ -7,7 +7,7 @@ import { SortDirective } from '../shared/sort.directive';
 @Component({
   selector: 'app-movies-list',
   templateUrl: './movies-list.component.html',
-  styleUrls: ['./movies-list.component.css']
+  styleUrls: ['./movies-list.component.scss']
 })
 export class MoviesListComponent implements OnInit {
 
@@ -43,7 +43,7 @@ export class MoviesListComponent implements OnInit {
 
   initTable() {
     Object.keys(this.moviesInfo[0]).forEach((item: string) => {
-      if (item === "Imdb" || item === "Language") {
+      if (item === "Imdb") {
         this.columns.push({
           title: item, sort: false
         });

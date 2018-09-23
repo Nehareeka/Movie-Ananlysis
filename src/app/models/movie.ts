@@ -21,6 +21,7 @@ export class Movie implements IMovie {
         public Language: string,
         public Country: string,
         public Content_rating: string,
+        public Genres: string,
         public Budget: number,
         public Year: number,
         public Imdb: string
@@ -32,6 +33,7 @@ export class Movie implements IMovie {
         this.Language =  Language;
         this.Country = Country;
         this.Content_rating =  Content_rating;
+        this.Genres =  Genres;
         this.Budget = <number>Budget;
         this.Year = <number>Year;
         this.Imdb = Imdb;

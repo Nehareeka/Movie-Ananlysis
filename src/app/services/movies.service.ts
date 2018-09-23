@@ -20,6 +20,7 @@ private _movieUrl = '../assets/movie.json';
           movie.language,
           movie.country,
           movie.content_rating,
+          movie.genres,
           Number(movie.budget),
           Number(movie.title_year),
           movie.movie_imdb_link)))
