@@ -6,7 +6,7 @@
   body.dark-mode {
     background-color: #111;
     color: $light-color;
-    .panel .panel-primary {
+    .panel .panel-primary, .table {
       background-color: $light-color;
     }
     tr {
@@ -21,7 +21,7 @@
   body.light-mode {
     background-color: $light-color;
     color: $dark-color;
-    .table {
+    .panel .panel-primary, .table {
       background-color: $dark-color;
     }
     tr {

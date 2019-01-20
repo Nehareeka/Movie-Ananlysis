@@ -1,13 +1,10 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<button type="button" name="dark_light" (click)="toggleDarkLight()" title="Toggle dark/light mode">Lights On</button>
-    <div class="main" style="text-align:center">
+<div class="main" style="text-align:center">
+  <button class="btn btn-default" type="button" name="dark_light" (click)="toggleDarkLight()" title="Toggle dark/light mode">Lights {{ on ? "Out" : "In"}}</button>
   <h1>
     Welcome to {{ title }}!
   </h1>
 </div>
 
 <div class='container'>
-    <app-movies-list></app-movies-list>
+  <app-movies-list></app-movies-list>
 </div>
-   
-

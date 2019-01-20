@@ -35,11 +35,11 @@
           <tr *ngFor='let movie of pagedItems'>
             <td>{{ movie?.Title }}</td>
             <td>{{ movie?.Director }}</td>
-            <td>{{ movie?.Actor_1 }}</td>
-            <td>{{ movie?.Actor_2 }}</td>
+            <td>{{ movie?.Actor1 }}</td>
+            <td>{{ movie?.Actor2 }}</td>
             <td>{{ movie?.Language }}</td>
             <td>{{ movie?.Country }}</td>
-            <td>{{ movie?.Content_rating }}</td>
+            <td>{{ movie?.Rating }}</td>
             <td>{{ movie?.Genres }}</td>
             <td>{{ movie?.Budget | currency:'USD': 'symbol' : '1.0' }}</td>
             <td>{{ movie?.Year }}</td>

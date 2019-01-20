@@ -7,11 +7,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Movie Analysis';
-
+  on: boolean = true;
   public toggleDarkLight() {
 
     let body = document.getElementsByTagName("body")[0];
     let currentClass = body.className;
     body.className = currentClass === "dark-mode" ? "light-mode" : "dark-mode";
+    if (body.className === "light-mode") {
+        this.on = true;
+    } else {
+      this.on = false;
+    }
   }
 }
