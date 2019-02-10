@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Movie } from 'src/app/models/movie';
-import { MoviesService } from 'src/app/services/movies.service';
+import { IMovie } from 'src/app/models/movie';
 import { PagerService } from 'src/app/services/pager.service';
 import { SortDirective } from '../shared/sort.directive';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-movies-list',
@@ -12,28 +12,25 @@ import { SortDirective } from '../shared/sort.directive';
 export class MoviesListComponent implements OnInit {
 
   // array of all items to be paged
-  private moviesInfo: Movie[];
+  private moviesInfo: IMovie[];
   // paged items
-  pagedItems: Movie[];
+  pagedItems: IMovie[];
   public columns: Array<any> = [];
   // pager object
   pager: any = {};
 
   public config: any;
   private pageTitle: string = 'Here is a list of popular movies: ';
-  constructor(private _movieService: MoviesService, private _pagerService: PagerService) { }
+  constructor(private _pagerService: PagerService,
+  private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this._movieService.getMovies()
-      .subscribe((response: any) => {
-        this.moviesInfo = response;
-        // initialize to page 1
-        this.setPage(1);
-        this.initTable();
-      });
+    this.moviesInfo = this.route.snapshot.data['initData'];
+    this.setPage(1);
+    this.initTable();
   }
 
-  setPage(page: number, data: Movie[] = this.moviesInfo) {
+  setPage(page: number, data: IMovie[] = this.moviesInfo) {
     // get pager object from service
     this.pager = this._pagerService.getPager(data.length, page);
 

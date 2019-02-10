@@ -8,6 +8,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { PagerService } from 'src/app/services/pager.service';
 import { SortDirective } from './shared/sort.directive';
 import { FilterDirective } from './shared/filter.directive';
+import { RouterModule } from '@angular/router';
+import { MoviesResolver } from 'src/app/services/movies-resolver.service';
+
 
 @NgModule({
   declarations: [
@@ -18,10 +21,16 @@ import { FilterDirective } from './shared/filter.directive';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot([
+      { path: 'movies', component: MoviesListComponent, resolve: { initData: MoviesResolver } },
+      { path: '', redirectTo: 'movies', pathMatch: 'full' },
+      { path: '**', redirectTo: 'movies', pathMatch: 'full' }
+    ])
   ],
   providers: [MoviesService,
-  PagerService],
+    PagerService,
+    MoviesResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
